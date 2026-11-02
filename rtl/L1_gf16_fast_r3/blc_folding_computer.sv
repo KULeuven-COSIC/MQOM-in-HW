@@ -1,3 +1,24 @@
+/*
+ * blc_folding_computer.sv
+ * -----------------------
+ * This file implements the MQOM folding computation, including accumulation
+ * of raw chunks, computation and application of delta corrections, and
+ * generation of the folded polynomial evaluation values.
+ *
+ * Copyright (c) 2026 KU Leuven - COSIC
+ * Author: Stelios Manasidis
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ */
 
 `include "mqom2_main_header.vh"
 
@@ -81,13 +102,6 @@ state_fold_comp_t state_fold_comp;
 
 reg state_acc_0_pip;
 
-//typedef enum logic [0:0] {
-//    FREEZE_CTR,
-//    INCR_CTR
-//} state_fold_comp_t;
-
-//counter_opcode_t counter_opc;
-
 reg [ACC_ITER_LOG2-1:0] iter_counter;
 reg                     iter_counter_MSB_pip;
 reg                     iter_counter_plus1;
@@ -142,46 +156,10 @@ reg state_is_send_u1_pip;
 reg acc_u1_reached;
 reg x_0_word_valid_internal;
 reg u0_word_coming, u1_word_coming, update_u_regs_keep_remainder;//, sub_chunk_counter_target_val;
-//reg u0_word_valid_pip, u0_word_valid_pip_train_pip;//, u1_word_valid_pip, u1_word_valid_pip_train_pip;
-
-//localparam U0_U1_TRAIN_WIDTH = 4;
-//reg [U0_U1_TRAIN_WIDTH-1:0] u0_word_valid_pip_train;
-//reg [U0_U1_TRAIN_WIDTH-1:0] u1_word_valid_pip_train;
-
-//reg [`WORD_BITS-1:0] u0_store_regs;
-//reg [`WORD_BITS-1:0] u1_store_regs;
-//reg [$clog2(`WORD_BITS/$bits(u0_word))-1:0] u0_store_ctr;
-//reg [$clog2(`WORD_BITS/$bits(u1_word))-1:0] u1_store_ctr;
 
 always_ff @ (posedge clk) begin
     if (state_fold_comp == S_ACC_0)
         eval_point_r_hold <= eval_point_r;
-    
-    // ****************************************************
-    // Full u0_u1_word to control module -related stuff
-//    if (rst)
-//        u0_store_ctr <= 'h0;
-//    else if (u_0_word_valid || |u0_word_valid_pip_train)
-//        u0_store_ctr <= u0_store_ctr + 1'b1;
-
-//    if (rst)
-//        u1_store_ctr <= 'h0;
-//    else if (u_1_word_valid || |u1_word_valid_pip_train)
-//        u1_store_ctr <= u1_store_ctr + 1'b1;
-    
-//    if  (u_0_word_valid)
-//        u0_store_regs <= {u0_word, u0_store_regs[`WORD_BITS-1:$bits(u0_word)]};
-//    else if (`TAU%2 == 1) begin // Note: NOT 100% accurate for all ETA and TAU pairs
-//        if (|u0_word_valid_pip_train)
-//            u0_store_regs <= {'h0, u0_store_regs[`WORD_BITS-1:$bits(u0_word)]};
-//    end
-    
-//    if  (u_1_word_valid)
-//        u1_store_regs <= {u1_word, u1_store_regs[`WORD_BITS-1:$bits(u1_word)]};
-//    else if (`TAU%2 == 1) begin // Note: NOT 100% accurate for all ETA and TAU pairs
-//        if (|u1_word_valid_pip_train)
-//            u1_store_regs <= {'h0, u1_store_regs[`WORD_BITS-1:$bits(u0_word)]};
-//    end
     
     if (raw_counter == 'h0)
         acc_u1_reached <= 1'b0;
@@ -191,25 +169,12 @@ always_ff @ (posedge clk) begin
     u0_u1_word_full_valid_next <= (sub_chunk_counter == 1'b0 && x_0_done && state_fold_comp == S_SEND_X0_U0) || (sub_chunk_counter == 'h1 && raw_counter == `RAW_CHUNK_NUM) || (acc_u1_reached);
     u0_u1_word_full_valid <= u0_u1_word_full_valid_next;
     
-//    u0_word_valid_pip <= u_0_word_valid;
-//    u0_word_valid_pip_train_pip <= u0_word_valid_pip_train[U0_U1_TRAIN_WIDTH-1];
-//    u1_word_valid_pip <= u_1_word_valid;
-//    u1_word_valid_pip_train_pip <= u1_word_valid_pip_train[U0_U1_TRAIN_WIDTH-1];
-    
-//    u0_word_valid_pip_train <= {u0_word_valid_pip_train, (u0_word_valid_pip /*&& `LAST_MPC_ROUND*/ && (state_fold_comp == S_INIT_MEMS || state_fold_comp == S_SEND_U1))};
-//    u1_word_valid_pip_train <= {u1_word_valid_pip_train, (u1_word_valid_pip && !u_1_word_valid /*&& `LAST_MPC_ROUND*/ && state_fold_comp == S_INIT_MEMS)};
-    
     u0_word_coming <= (state_fold_comp == S_SEND_X0_U0 || state_fold_comp == S_COMBINE_FD);
     u1_word_coming <= (state_fold_comp == S_SEND_U1) || state_is_send_u1_pip;
     
     u0_word_coming_out <= u0_word_coming;
     u1_word_coming_out <= u1_word_coming;
     // *******************
-    
-//    if (rst)
-//        e <= `TAU-1;
-//    else if (u_0_word_valid && state_fold_comp == S_SEND_X0_U0 && sub_chunk_counter==(`BASE_FIELD_ELEM_WORDS_PER_CHUNK-1) && raw_counter[$clog2(`RAW_CHUNK_NUM+1)-1:0]==`RAW_CHUNK_NUM)
-//        e <= `LAST_MPC_ROUND ? 'h0 : (e + 1'b1);
     
     send_x <= acc_done;
 
@@ -222,19 +187,7 @@ always_ff @ (posedge clk) begin
     
     if (((sub_chunk_counter-'h2) & 'h3)==0 && x_0_done)
         u0_word <= 1;// TODO: replace
-    
-//    if (rst)
-//        u_1_word_valid <= 1'b0;
-//    else if (state_is_send_u1_pip && raw_counter[$clog2(`U_1_START_CHUNK)-1:0]==(`U_1_START_CHUNK-1) && u1_elem_counter==((`MQOM2_PARAM_MQ_N%`RAW_CHUNK_BITS)/8))
-//        u_1_word_valid <= 1'b1;
-//    else if (state_fold_comp == S_INIT_MEMS)
-//        u_1_word_valid <= 1'b0;
-
-//    if (((sub_chunk_counter-'h2) & 'h3)==0 && x_0_done) // Todo: parametrize
-//        u_0_word_valid <= 1'b1;
-//    else
-//        u_0_word_valid <= 1'b0;
-    
+   
     state_is_send_u1_pip <= (state_fold_comp == S_SEND_U1);
     
     if (rst)
@@ -262,17 +215,7 @@ always_ff @ (posedge clk) begin
         p_i_internal <= p_i_internal + 'b1;
         
     load_combine_regs_train <= {load_combine_regs_train[0], (state_fold_comp == S_COMBINE_FD)};
-    
-//    if (load_combine_regs_train[1]) begin
-//        for (int i = 0; i < (`FIELD_EXT_LOG2_CARD*`RAW_CHUNK_BITS); i++) begin
-//            if (p_i_pip2==(i % `FIELD_EXT_LOG2_CARD)) begin
-//                fd_combine_regs[i] <= fd_j_chunk_old[i / `FIELD_EXT_LOG2_CARD];
-//            end
-//        end
-//    end else begin
-//        fd_combine_regs <= (fd_combine_regs >> (`GF256_ELEM_PARAL_WIDTH));
-//    end
-    
+
     if (load_combine_regs_train[1]) begin
         fd_combine_regs_x <= fd_combine_regs_x ^
                             {gf16_by_gf256_fused_lift_n_mul_by_basis_elem( fd_j_chunk_old[60 +:4], p_i_pip2),
