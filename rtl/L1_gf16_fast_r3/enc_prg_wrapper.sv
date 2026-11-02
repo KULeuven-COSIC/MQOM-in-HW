@@ -1,3 +1,25 @@
+/*
+ * enc_prg_wrapper.sv
+ * ------------------
+ * This file implements the Enc PRG wrapper for MQOM key
+ * generation, signing, and verification, including GGM tree
+ * expansion, commitment generation, and equation sampling.
+ *
+ * Copyright (c) 2026 KU Leuven - COSIC
+ * Author: Stelios Manasidis
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ */
+
 `default_nettype none
 
 `include "mqom2_main_header.vh"
