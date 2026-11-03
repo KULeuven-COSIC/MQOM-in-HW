@@ -1,3 +1,25 @@
+/*
+ * mqom_main_fsm.sv
+ * ----------------
+ * This file implements the top-level MQOM control FSM for key generation,
+ * signing, and verification, coordinating SHAKE operations, data transfers,
+ * and synchronization between the main computational modules.
+ *
+ * Copyright (c) 2026 KU Leuven - COSIC
+ * Author: Stelios Manasidis
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ */
+
 `default_nettype none
 
 `include "keccak_interc_defs.vh" // Also calls mqom header(s)
