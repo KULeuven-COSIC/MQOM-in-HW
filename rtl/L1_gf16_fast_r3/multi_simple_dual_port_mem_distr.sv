@@ -1,12 +1,12 @@
- /*
-  * This file implements a multiple simple dual-port (SDP) LUTRAM-based memory module.
-  *
-  * To make external memory instantiation simppler, we use a single file for all
-  * SDP mems sharing the same widths, depths & addresses.
-  *
-  * Derived from an AMD/Xilinx memory template and modified for this project.
-  *
-  */
+/*
+ * This file implements a multiple simple dual-port (SDP) LUTRAM-based memory module.
+ *
+ * To simplify external memory instantiation, a single module is used for
+ * multiple SDP memories sharing the same widths, depths, and addresses.
+ *
+ * Derived from an AMD/Xilinx memory template and modified for this project.
+ *
+ */
 
 `default_nettype none
 
