@@ -1,3 +1,14 @@
+/*
+ * This Python-generated testbench runs 100 deterministic KeyGen, Sign, and
+ * Verify test vectors, checking the results and measuring execution cycles.
+ *
+ * Golden reference outputs are derived from the MQOM v2.1 software
+ * implementation.
+ *
+ * File not meant to be edited manually.
+ *
+ */
+
 `timescale 1ns/1ps
 
 `include "mqom2_main_header.vh"
