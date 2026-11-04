@@ -1,3 +1,29 @@
+/*
+ * tb_mqom_keygen_sign_verify_single_det.sv
+ * ----------------------------------------
+ * This testbench runs a single deterministic MQOM KeyGen, Sign, and Verify
+ * sequence, checking the results against known reference outputs.
+ * Verification is repeated to ensure that the first verification does not
+ * alter the signature data stored in memory.
+ *
+ * Golden reference outputs are derived from the MQOM v2.1 software
+ * implementation.
+ *
+ * Copyright (c) 2026 KU Leuven - COSIC
+ * Author: Stelios Manasidis
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ */
+
 `timescale 1ns/1ps
 
 `include "mqom2_main_header.vh"
