@@ -24,10 +24,6 @@ module tb_mqom_keygen_sign_verify_single_det;
     wire         bad_sig;
     reg          err;
     
-    wire debug_wire = dut.enc_prg_wrapper_inst.enc_fsm_inst.tree_lvl_ctr_j != dut.enc_prg_wrapper_inst.enc_fsm_inst.sibl_path_lvl_ctr;
-    
-//    wire debug_wire_keccaks = (dut.keccak_inst.shake.state_regs != dut.keccak_inst.keccak_inst.data_path_instance.state_regs);
-
     // DUT instantiation
     mqom_wrapper dut (
         .rst        (rst),
