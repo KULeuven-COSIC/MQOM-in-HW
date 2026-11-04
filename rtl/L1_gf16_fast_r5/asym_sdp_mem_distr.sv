@@ -1,3 +1,11 @@
+/*
+ * This file implements an asymmetric simple dual-port distributed RAM with
+ * configurable write and read port widths and depths.
+ *
+ * Derived from an AMD/Xilinx memory template and modified for this project.
+ *
+ */
+
 module asym_sdp_mem_distr #(
     parameter WIDTH_0 = 8, // Should always be a power-of-two multiple of WIDTH_1
     parameter DEPTH_0 = 64,
