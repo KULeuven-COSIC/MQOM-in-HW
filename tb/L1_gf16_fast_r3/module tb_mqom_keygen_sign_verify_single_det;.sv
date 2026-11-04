@@ -1,8 +1,19 @@
+/*
+ * This testbench runs a single deterministic MQOM KeyGen, Sign, and Verify
+ * sequence, checking the results against known reference outputs.
+ * Verification is repeated to ensure that the first verification does not
+ * alter the signature data stored in memory.
+ *
+ * Golden reference outputs are derived from the MQOM v2.1 software
+ * implementation.
+ *
+ */
+
 `timescale 1ns/1ps
 
 `include "mqom2_main_header.vh"
 
-module tb_mqom_keygen;
+module tb_mqom_keygen_sign_verify_single_det;
 
     // Testbench signals
     reg        rst        = 1'b0;
