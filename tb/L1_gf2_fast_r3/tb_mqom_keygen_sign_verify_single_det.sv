@@ -2,7 +2,7 @@
 
 `include "mqom2_main_header.vh"
 
-module tb_mqom_keygen_sign_verify;
+module tb_mqom_keygen_sign_verify_single_det;
 
     // Testbench signals
     reg        rst        = 1'b0;
