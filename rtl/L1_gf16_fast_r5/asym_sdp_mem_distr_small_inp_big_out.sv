@@ -1,3 +1,27 @@
+/*
+ * asym_sdp_mem_distr_small_inp_big_out.sv
+ * ---------------------------------------
+ * This file implements an asymmetric simple dual-port distributed RAM with
+ * a narrow write port and a wider read port, supporting configurable widths
+ * and depths, memory initialization, and synchronous read reset.
+ *
+ * Derived from an AMD/Xilinx memory template and modified for this project.
+ *
+ * Copyright (c) 2026 KU Leuven - COSIC
+ * Author: Stelios Manasidis
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ */
+
 module asym_sdp_mem_distr_small_inp_big_out #(
     parameter WIDTH_0 = 8,
     parameter DEPTH_0 = 64, // Should always be a power-of-two multiple of DEPTH_1
