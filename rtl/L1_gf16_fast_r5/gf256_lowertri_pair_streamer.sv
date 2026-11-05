@@ -1,19 +1,26 @@
-// **************************************************************************
-// This module takes a stream from the Enc PRG module (AES-128 in this case)
-// and outputs 2 elements of THE SAME ROW of A, and then 2 elements of
-// vector b @ each cycle.
-//
-// **********************************************************************
-// To be used with AES-128 = 16 GF256 elements @ every valid input cycle
-// When a given row of A has an odd number of elements, the last output
-// will have its most significant GF256 element set to zero, which
-// aligns with the lower-triangular construction of matrix A, and
-// allows to use simpler downstream control logic & datatapaths.
-//
-// ******************************************************************
-// The comments were written for the simple NUM_PARALLEL_ENC=1 case,
-// therefore some indexing comments may not be exact for
-// NUM_PARALLEL_ENC!=1
+/*
+ * gf256_lowertri_pair_streamer.sv
+ * -------------------------------
+ * This file implements a streaming interface that converts Enc PRG output
+ * GF(256) element pairs for the lower-triangular matrix A and vector b.
+ * Supports parallel AES lanes. 
+ * The comments are written for the simple NUM_PARALLEL_ENC==1 case,
+ * therefore some indexing comments may not be exact for NUM_PARALLEL_ENC!=1
+ *
+ * Copyright (c) 2026 KU Leuven - COSIC
+ * Author: Stelios Manasidis
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ */
 
 `default_nettype none
 
