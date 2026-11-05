@@ -1,6 +1,6 @@
 /*
  * gf256_fd_combiner.sv
- * -------------------------
+ * --------------------
  * Gate-level GF(2^8) combiner for:
  *
  *   u0 = fd0
@@ -13,6 +13,20 @@
  *      ^ (x^7 * fd7)
  *
  * Field polynomial: x^8 + x^4 + x^3 + x + 1 = 0x11B
+ *
+ * Copyright (c) 2026 KU Leuven - COSIC
+ * Author: Stelios Manasidis
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
  */
 
 `default_nettype none
