@@ -1,11 +1,13 @@
 /*
  * gf256_mul_func.svh
- * ------------
- * Gate-level GF256 multiplier function with reduction modulo 0x11B.
+ * ------------------
+ * This file implements gate-level GF(256) multiplication and squaring
+ * modulo 0x11B, along with GF(16)-to-GF(256) lifting, fused multiplication,
+ * and multiplication by selected GF(256) basis elements.
  *
  * Copyright (c) 2026 KU Leuven - COSIC
- * Author: Stelios Manasidis    
- *        
+ * Author: Stelios Manasidis
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
@@ -13,7 +15,7 @@
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
  *
  */
