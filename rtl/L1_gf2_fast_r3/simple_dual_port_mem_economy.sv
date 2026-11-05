@@ -1,9 +1,11 @@
- /*
-  * This file implements a simple dual-port memory module.
-  *
-  * Derived from an AMD/Xilinx memory template and modified for this project.
-  *
-  */
+/*
+ * This file implements a simple dual-port memory module, optimized for
+ * FPGA memory utilization by splitting the data width into 36-bit multiples
+ * and a remainder implemented using distributed RAM.
+ *
+ * Derived from an AMD/Xilinx memory template and modified for this project.
+ *
+ */
 
 `default_nettype none
 
