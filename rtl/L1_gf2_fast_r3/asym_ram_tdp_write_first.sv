@@ -1,3 +1,11 @@
+/*
+ * This file implements an asymmetric true dual-port RAM with write-first
+ * behavior and configurable data widths and depths.
+ *
+ * Derived from an AMD/Xilinx memory template and modified for this project.
+ *
+ */
+
 module asym_ram_tdp_write_first #(
     parameter WIDTH_0 = 8,
     parameter DEPTH_0 = 64,
