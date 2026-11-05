@@ -1,5 +1,23 @@
-// Minimal streaming AES-128 key expander
-// Supports NUM_PARAL_KEY_EXPAND parallel AES-128 key schedules sharing control.
+/*
+ * aes_on_the_fly_key_expand_parallel.sv
+ * -------------------------------------
+ * This file implements a streaming AES-128 key expander supporting multiple
+ * parallel key schedules with shared control logic.
+ *
+ * Copyright (c) 2026 KU Leuven - COSIC
+ * Author: Stelios Manasidis
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ */
 
 `default_nettype none
 
