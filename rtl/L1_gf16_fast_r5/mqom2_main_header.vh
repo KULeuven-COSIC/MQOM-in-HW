@@ -24,8 +24,7 @@
 `ifndef MQOM_GENERIC_HEADER
 `define MQOM_GENERIC_HEADER
 
-//`include "mqom2_L1_gf16_fast_r3_Enc4_ParEq1.vh"
-`include "mqom2_L1_gf16_fast_r5_Enc4_ParEq1.vh"
+`include "mqom2_L1_gf16_fast_r5_Enc4.vh"
 
 `define BYTE_SIZE_FIELD_BASE(num) (((num) * `FIELD_BASE_LOG2_CARD) / 8)
 
