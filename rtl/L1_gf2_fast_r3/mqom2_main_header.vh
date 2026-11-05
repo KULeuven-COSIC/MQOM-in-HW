@@ -1,3 +1,26 @@
+/*
+ * mqom2_main_header.vh
+ * --------------------
+ * This file defines generic MQOM hardware parameters and macros, including
+ * field sizes, datapath widths, memory addressing, salt tweaks, and GGM tree
+ * sibling-path handling.
+ * The message length (MLEN_BYTES) can be adjusted as needed.
+ *
+ * Copyright (c) 2026 KU Leuven - COSIC
+ * Author: Stelios Manasidis
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ */
+
 `ifndef MQOM_GENERIC_HEADER
 `define MQOM_GENERIC_HEADER
 
